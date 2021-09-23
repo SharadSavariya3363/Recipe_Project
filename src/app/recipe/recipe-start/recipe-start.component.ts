@@ -2,8 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-recipe-start',
-  templateUrl: './recipe-start.component.html',
-  styleUrls: ['./recipe-start.component.css']
+  template: `<h3 class="text-center">Please select Recipe!</h3>`,
 })
 export class RecipeStartComponent implements OnInit {
 

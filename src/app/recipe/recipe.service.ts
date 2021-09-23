@@ -1,4 +1,5 @@
-import { Injectable , EventEmitter } from '@angular/core';
+import { Injectable  } from '@angular/core';
+import { Subject } from 'rxjs';
 import { Ingredient } from '../shared/ingredient.model';
 import { ShoppingListService } from '../shopping-list/shopping-list.service';
 import { Recipe } from './recipe.model';
@@ -7,7 +8,10 @@ import { Recipe } from './recipe.model';
   providedIn: 'root'
 })
 export class RecipeService {
-  recipeSelected = new EventEmitter<Recipe>();
+
+  recipesChanged = new Subject<Recipe[]>();
+
+  constructor(private shoppingListService: ShoppingListService) { }
 
   private recipes: Recipe[] = [
     new Recipe(
@@ -16,7 +20,7 @@ export class RecipeService {
       'https://www.thespruceeats.com/thmb/O4xB3FoR7B6ovTpcENFLtQyIuAU=/960x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/indian-style-burger-1957599-hero-01-266103a4bb4e4ee7b5feb4da2d2e99da.jpg', 
       [
          new Ingredient('Meat',1),
-         new Ingredient('Frenc Fries',20)
+         new Ingredient('French Fries',20)
        ]),
     new Recipe(
       'Coke', 
@@ -24,14 +28,14 @@ export class RecipeService {
       'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ4fibAxxQwaDwyy-ZlU4keIoLv4GuW0VOy-tOseFFP5OfDmp-xpE8eAJnEwlw9tXlxjIQ&usqp=CAU',
       [
         new Ingredient('Meat',1),
-        new Ingredient('Frenc Fries',50)
+        new Ingredient('French Fries',50)
       ]),
     new Recipe(
       'Payment', 
       'This is recipe of Payment', 
       'https://qualityinspection.org/wp-content/uploads/2012/01/HowtoPayChineseSuppliersbyBankTransferTT.jpg', 
       [
-        new Ingredient('Meat',1),
+        new Ingredient('Cradit Card',1),
         new Ingredient('Only Cash',100)
       ])
   ];
@@ -47,5 +51,20 @@ export class RecipeService {
   addIngrediantsToShoppingList(ingredients:Ingredient[]){
     this.shoppingListService.addIngediantFromRecipe(ingredients)
   }
-  constructor(private shoppingListService: ShoppingListService) { }
+
+  addRecipeEditToList(newRecipe:Recipe){
+    this.recipes.push(newRecipe);
+    this.recipesChanged.next(this.recipes.slice());
+  }
+
+  updateRecipeEditToList(index:number, newRecipe:Recipe){
+    this.recipes[index] = newRecipe;
+    this.recipesChanged.next(this.recipes.slice());
+  }
+
+  deleteRecipe(index:number){
+    this.recipes.splice(index, 1);
+    this.recipesChanged.next(this.recipes.slice());
+  }
+
 }

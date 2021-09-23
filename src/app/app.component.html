@@ -1,8 +1,9 @@
 <app-header></app-header>
 <div class="container">
-    <router-outlet></router-outlet>
-    <!-- <app-recipe *ngIf = "(loadedFeature) === 'recipe'"></app-recipe>
-    <app-shopping-list *ngIf = "(loadedFeature) !== 'recipe'"></app-shopping-list> -->
-    <app-server></app-server>
+    <div class="row">
+        <div class="col-sm-12">
+            <router-outlet></router-outlet>
+            <!-- <app-server></app-server> -->
+        </div>
+    </div>
 </div>
- 

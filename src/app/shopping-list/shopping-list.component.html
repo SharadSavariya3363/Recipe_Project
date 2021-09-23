@@ -2,7 +2,10 @@
     <div class="col-10">
         <app-shopping-edit></app-shopping-edit>
         <ul class="list-group">
-            <a href="#" class="list-group-item" *ngFor = "let ingrediant of ingrediants">
+            <a style="cursor: pointer;"
+             class="list-group-item" 
+             (click)="onEditItem(i)"
+             *ngFor = "let ingrediant of ingrediants; let i = index">
                 {{ ingrediant.name }} ({{ ingrediant.amount }})
             </a>
         </ul>
