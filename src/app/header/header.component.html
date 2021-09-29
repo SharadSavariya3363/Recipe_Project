@@ -9,6 +9,9 @@
           <a class="nav-link" routerLinkActive = "active" [routerLink] = "['/recipe']">Recipes</a>
         </li>
         <li class="nav-item">
+          <a class="nav-link" routerLinkActive = "active" [routerLink] = "['/auth']">Authenticate</a>
+        </li>
+        <li class="nav-item">
           <a class="nav-link" routerLinkActive = "active" [routerLink] = "['/shopping-list']">Shopping List</a>
         </li>
       </ul>
@@ -16,9 +19,8 @@
       <div class="dropdown ms-auto me-5">
         <button class="btn btn-dark dropdown-toggle" type="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">Manage</button>
         <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuLink">
-          <li><a class="dropdown-item" style="cursor: pointer;">Action</a></li>
-          <li><a class="dropdown-item" style="cursor: pointer;">Another action</a></li>
-          <li><a class="dropdown-item" style="cursor: pointer;">Something else</a></li>
+          <li><a class="dropdown-item" style="cursor: pointer;"(click)="onClickSave()" >Save Recipe</a></li>
+          <li><a class="dropdown-item" style="cursor: pointer;" (click)="onClickFetch()">Fetch Recipe</a></li>
         </ul>
       </div>
     </div>
